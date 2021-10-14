@@ -1,0 +1,30 @@
+<div id="homePage">
+  <!-- 模板驱动表单 隐式创建FormControl -->
+  <input type="text" required minlength="4" appForbiddenText="demo" [(ngModel)]="textStr" #textStrModel="ngModel" >
+  <!-- dirty表示修改过 touched表示foucs过 -->
+  <div *ngIf="textStrModel.invalid && (textStrModel.dirty || textStrModel.touched)"
+    class="alert">
+    <div *ngIf="textStrModel.errors?.required">
+      textStr is required.
+    </div>
+    <div *ngIf="textStrModel.errors?.minlength">
+      textStr must be at least 4 characters long.
+    </div>
+    <div *ngIf="textStrModel.errors?.forbiddenText">
+      textStr cannot be demo.
+    </div>
+
+  </div>
+  <button (click)="popup()">popup</button>
+  <button (click)="condition=!condition">toggle</button>
+  <div appHighlight bgColor="#f3ab28" fontColor="#fff">
+    <p *appNotIf="condition" class="unless a">
+      (A) This paragraph is displayed because the condition is false.
+    </p>
+    
+    <p *appNotIf="!condition" class="unless b">
+      (B) Although the condition is true,
+      this paragraph is displayed because appUnless is set to false.
+    </p>
+  </div>
+</div>

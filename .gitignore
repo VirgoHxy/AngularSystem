@@ -1,19 +1,24 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # compiled output
+# 编译输入文件夹
 /dist
 /tmp
 /out-tsc
 # Only exists if Bazel was run
+# 仅在运行 Bazel 时存在
 /bazel-out
 
 # dependencies
+# 依赖
 /node_modules
 
 # profiling files
+# chrome探查器事件json
 chrome-profiler-events*.json
 
 # IDEs and editors
+# 编辑器内置文件
 /.idea
 .project
 .classpath
@@ -23,6 +28,7 @@ chrome-profiler-events*.json
 *.sublime-workspace
 
 # IDE - VSCode
+# VSCode编辑器内置文件
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
@@ -31,6 +37,7 @@ chrome-profiler-events*.json
 .history/*
 
 # misc
+# 杂项
 /.sass-cache
 /connect.lock
 /coverage
@@ -41,5 +48,6 @@ testem.log
 /typings
 
 # System Files
+# 系统文件
 .DS_Store
 Thumbs.db

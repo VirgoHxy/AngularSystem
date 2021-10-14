@@ -1,1 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body {
+  --primary: #409eff;
+  --red: #e00;
+  --green: #42A948;
+  --blue: #409eff;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  margin: 0;
+}

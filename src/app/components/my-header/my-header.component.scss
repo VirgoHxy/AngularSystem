@@ -1,0 +1,49 @@
+:host {
+  position: relative;
+  display: block;
+  box-sizing: border-box;
+  height: 60px;
+  line-height: 60px;
+  padding: 0 20px;
+  background-color: #fff;
+  flex-shrink: 0;
+  box-shadow: 0 4px 10px -2px #bbb;  
+}
+
+.myHeader {
+  display: flex;
+  justify-content: space-between;
+}
+
+.myHeader h1 {
+  font-size: 2rem;
+  line-height: 60px;
+  font-weight: normal;
+}
+
+.myHeader .accountData {
+  display: flex;
+  align-items: center;
+}
+
+.accountData .accountDataListItem {
+  display: inline-block;
+  margin-right: 20px;
+}
+
+.accountData .accountDataListItem:last-child {
+  margin-right: 0;
+}
+
+.accountDataListItem.exit {
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  vertical-align: middle;
+  text-align: center;
+  font-size: 0.8rem;
+  color: #fff;
+  background-color: #c0c4cc;
+  border-radius: 50%;
+  cursor: pointer;
+}

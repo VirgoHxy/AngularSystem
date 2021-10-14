@@ -1,0 +1,8 @@
+:host {
+  display: block;
+  position: relative;
+  width: 210px;
+  height: 100%;
+  background-color: var(--primary);
+  box-shadow: 6px 0 10px -4px #999, inset -4px 0 6px 0 rgb(10 102 165 / 34%);
+}

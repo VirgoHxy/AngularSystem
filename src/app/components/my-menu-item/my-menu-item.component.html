@@ -1,0 +1,6 @@
+<!-- <div class="myMenuItem" [class.isActive]="item.active" (click)="changeRoute()"> -->
+<div class="myMenuItem" [routerLink]="item.name" routerLinkActive="active">
+  <span>
+    {{item.text}}
+  </span>
+</div>

@@ -1,0 +1,46 @@
+<div id="login">
+  <!-- 响应式表单 显示创建FormControl -->
+  <div [formGroup]="loginForm" (ngSubmit)="login()">
+    <h2 class="title">
+      {{config.title}}
+    </h2>
+    <div class="formCont">
+      <div class="formItem">
+        用户名<span class="red">*</span>:
+        <input type="text" formControlName="account" appForbiddenAccount="test" required>
+        <div *ngIf="account.invalid && (account.dirty || account.touched)" class="alert-danger">
+          <div *ngIf="account.errors?.required">
+            account is required.
+          </div>
+          <div *ngIf="account.errors?.forbiddenText">
+            account cannot be demo.
+          </div>
+        </div>
+      </div>
+      <div class="formItem">
+        密&nbsp;&nbsp;&nbsp;码<span class="red">*</span>:
+        <input type="password" formControlName="password" required>
+        <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert-danger">
+          <div *ngIf="password.errors?.required">
+            password is required.
+          </div>
+        </div>
+      </div>
+      <div formArrayName="others">
+
+        <div class="formItem" *ngFor="let other of others.controls;let i = index;">
+          <!-- The repeated alias template -->
+          <label>
+            其&nbsp;&nbsp;&nbsp;它{{i+1}}:
+            <input type="text" [formControlName]="i">
+          </label>
+          <button type="button" class="addButton" *ngIf="i == others.controls.length-1" (click)="addOthers()">+</button>
+          <button type="button" class="addButton" *ngIf="i != others.controls.length-1"
+            (click)="removeOthers(i)">-</button>
+        </div>
+      </div>
+    </div>
+    <button type="submit" [disabled]="!loginForm.valid" (click)="login()">登录({{ loginForm.status=="VALID" ? "√" : "×"
+      }})</button>
+  </div>
+</div>

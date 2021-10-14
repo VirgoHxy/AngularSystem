@@ -1,0 +1,16 @@
+:host {
+  display: block;
+  height: calc(100% - 60px);
+  background-color: #e8e8e8;
+  .myBody {
+    display: flex;
+    height: 100%;
+    .main {
+      width: calc(100% - 240px);
+      height: calc(100% - 42px);
+      padding: 0;
+      margin: 20px;
+      background-color: #fff;
+    }
+  }
+}
