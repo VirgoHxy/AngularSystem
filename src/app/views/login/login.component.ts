@@ -13,14 +13,16 @@ import { setExpireStorage, getExpireStorage } from '../../plugins/storage.plugin
 })
 
 export class LoginComponent implements OnInit {
-
+  // 全局配置
   config: AppConfig;
 
+  // new 实例创建
   // loginForm = new FormGroup({
   //   account: new FormControl(''),
   //   password: new FormControl('')
   // })
 
+  // FormBuilder 创建
   loginForm = this.fb.group({
     account: ['', [Validators.required, forbiddenTextValidator(/demo/i)]],
     password: ['', Validators.required],
@@ -29,14 +31,17 @@ export class LoginComponent implements OnInit {
     ])
   })
 
+  // 获取 accountAbstractControl 对象
   get account(): AbstractControl {
     return this.loginForm.get('account')!;
   }
   
+  // 获取 passwordAbstractControl 对象
   get password(): AbstractControl {
     return this.loginForm.get('password')!;
   }
 
+  // 获取 othersFormArray 数组
   get others() {
     return this.loginForm.get('others') as FormArray;
   }
@@ -54,7 +59,7 @@ export class LoginComponent implements OnInit {
     this.activatedRoute
       .queryParamMap
       .pipe(map(params => params.get('id') || 'normal')).subscribe(data => console.log('id:' + data));
-
+    // 获取缓存
     this.getStorage();
   }
 
@@ -68,6 +73,7 @@ export class LoginComponent implements OnInit {
     this.others.removeAt(index);
   }
 
+  // 登录
   async login() {
     let { account, password } = this.loginForm.value;
     let checkLogin = await new Promise((resolve, reject) => {
@@ -80,12 +86,13 @@ export class LoginComponent implements OnInit {
       }, 1000);
     })
     if (checkLogin) {
-      this.toHome();
+      this.loginSuccess();
     } else {
       alert("账号密码错误")
     }
   }
 
+  // 获取缓存
   getStorage() {
     let accountData = getExpireStorage(sessionStorage, "accountData");
     if (accountData) {
@@ -95,7 +102,8 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  toHome() {
+  // 登录成功
+  loginSuccess() {
     let { account, password } = this.loginForm.value;
     setExpireStorage(sessionStorage, "accountData", {
       account: account,

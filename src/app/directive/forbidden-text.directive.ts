@@ -1,13 +1,15 @@
 import { Directive, Input } from "@angular/core";
 import { ValidatorFn, AbstractControl, ValidationErrors, Validator, NG_VALIDATORS } from "@angular/forms";
 
-export function forbiddenTextValidator(textRe: RegExp): ValidatorFn {
+// 禁止输入验证器
+export function forbiddenTextValidator(textRe: RegExp, message?: string): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
     const forbidden = textRe.test(control.value);
-    return forbidden ? { forbiddenText: { value: control.value } } : null;
+    return forbidden ? { forbiddenText: { value: control.value, message } } : null;
   };
 }
 
+// 禁止输入指令
 @Directive({
   selector: '[appForbiddenText]',
   providers: [{ provide: NG_VALIDATORS, useExisting: ForbiddenValidatorDirective, multi: true }]

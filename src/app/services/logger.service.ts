@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 
+// 日志服务 全局注册
 @Injectable({
   providedIn: 'root'
 })

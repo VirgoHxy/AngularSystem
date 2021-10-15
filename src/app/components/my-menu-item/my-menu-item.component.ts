@@ -10,19 +10,21 @@ import { getCurrRoute }  from '../../plugins/angularUtils.plugin'
   styleUrls: ['./my-menu-item.component.scss']
 })
 export class MyMenuItemComponent implements OnInit {
-
-  @Input() item!: Menu;
+  // 输入单个侧边栏
+  @Input() menu!: Menu;
   
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private myBodyComponent : MyBodyComponent) { }
 
   ngOnInit() {
   }
 
+  // 路由导航
   changeRoute() {
     let currRoute = getCurrRoute(this.router);
-    if (currRoute.name != this.item.name) {
-      this.router.navigate([this.item.name], { relativeTo: this.activatedRoute });
+    if (currRoute.name != this.menu.name) {
+      this.router.navigate([this.menu.name], { relativeTo: this.activatedRoute });
     } else {
+      // 重载当前路由
       this.myBodyComponent.reload();
     }
   }

@@ -8,13 +8,12 @@ import { setExpireStorage, getExpireStorage } from '../../plugins/storage.plugin
   templateUrl: './my-header.component.html',
   styleUrls: ['./my-header.component.scss']
 })
-
 export class MyHeaderComponent implements OnInit {
-  
+  // 全局配置
   config: AppConfig;
-
+  // 账号数据
   accountData!: AccountData;
-
+  // 账号数据列表 循环展示使用
   accountDataList: Array<{
     key: string;
     value: string;
@@ -26,7 +25,6 @@ export class MyHeaderComponent implements OnInit {
 
   ngOnInit() {
     // console.log("header初始化")
-
     let accountData = getExpireStorage(sessionStorage, "accountData");
     if (accountData) {
       this.accountData = accountData;
@@ -34,6 +32,7 @@ export class MyHeaderComponent implements OnInit {
     }
   }
 
+  // 将对象转换为数组
   getAccountDataList() {
     forName: for (const key in this.accountData) {
       let listObj = {
@@ -57,6 +56,7 @@ export class MyHeaderComponent implements OnInit {
     }
   }
   
+  // 退出
   exit() {
     this.router.navigate(["/"], {
       queryParams: { id: +new Date() },

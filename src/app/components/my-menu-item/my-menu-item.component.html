@@ -1,6 +1,6 @@
 <!-- <div class="myMenuItem" [class.isActive]="item.active" (click)="changeRoute()"> -->
-<div class="myMenuItem" [routerLink]="item.name" routerLinkActive="active">
+<div class="myMenuItem" [routerLink]="menu.name" routerLinkActive="active" (click)="changeRoute()">
   <span>
-    {{item.text}}
+    {{menu.text}}
   </span>
 </div>

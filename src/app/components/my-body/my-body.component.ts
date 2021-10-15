@@ -6,15 +6,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./my-body.component.scss']
 })
 export class MyBodyComponent implements OnInit {
-
-  reloadFlag = true;
+  reloadFlag: boolean = true; // 重载
 
   constructor() { }
 
+  // 初始化
   ngOnInit() {
-    // console.log("body初始化")
+    // console.log("body初始化 只加载一次")
   }
 
+  // 重新加载路由页面
   reload() {
     this.reloadFlag = false;
     setTimeout(() => {

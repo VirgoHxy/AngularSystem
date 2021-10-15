@@ -1,0 +1,24 @@
+<div class="myFormItem" [formGroup]="form">
+  <!-- 标签 -->
+  <label [attr.for]="formItem.key">{{formItem.label}}<span *ngIf="formItem?.validators?.required"
+      class="colorRed">*</span></label>
+  <!-- 项 -->
+  <div [ngSwitch]="formItem.controlType" class="item">
+    <input *ngSwitchCase="'textbox'" [formControlName]="formItem.key" [id]="formItem.key" [type]="formItem.type"
+      autocomplete="off" [required]="formItem?.validators?.required || false">
+    <select [id]="formItem.key" *ngSwitchCase="'dropdown'" [formControlName]="formItem.key">
+      <option *ngFor="let opt of formItem.options" [value]="opt.key">{{opt.value}}</option>
+    </select>
+    <!-- 错误提示 -->
+    <div
+      *ngIf="form.controls[formItem.key].invalid && (form.controls[formItem.key].dirty || form.controls[formItem.key].touched)"
+      class="errorMessage">
+      <div *ngIf="form.controls[formItem.key].errors?.required">
+        请输入{{formItem.label}}
+      </div>
+      <div *ngIf="form.controls[formItem.key].errors?.forbiddenText">
+        {{form.controls[formItem.key].errors?.forbiddenText.message}}
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
 @Component({
@@ -9,16 +8,18 @@ import { switchMap } from 'rxjs/operators';
   styleUrls: ['./home-page.component.scss']
 })
 export class HomePageComponent implements OnInit {
-
-  textStr = "";
-
-  condition = false;
+  // input 的值
+  text: string = "";
+  // 条件
+  condition: boolean = false;
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
+    // 获取参数
     console.log("id:" + this.activatedRoute.snapshot.paramMap.get('id')!);
     console.log("num:" + this.activatedRoute.snapshot.paramMap.get('num')!);
+    // 获取参数
     // this.activatedRoute.paramMap.pipe(
     //   switchMap((params: ParamMap) =>
     //    of(params.get('id'))
@@ -28,12 +29,14 @@ export class HomePageComponent implements OnInit {
     // })
   }
   
+  // popup 多路由出口
   popup() {
     this.router.navigate([{outlets: { popup: ['myPopup'] }}]); 
   }
 
+  // 是否可离开
   canDeactivate() {
-    return !this.textStr;
+    return !this.text;
   }
 
 }

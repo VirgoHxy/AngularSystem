@@ -1,8 +1,8 @@
 <div class="myMenu">
-  <ng-content></ng-content>
+  <!-- 侧边栏列表 -->
   <nav class="menuList">
     <div *ngFor="let menuItem of menuList; trackBy: trackByFn">
-      <app-my-menu-item *ngIf="!menuItem.hide" [item]="menuItem"></app-my-menu-item>
+      <app-my-menu-item *ngIf="!menuItem.hide" [menu]="menuItem"></app-my-menu-item>
     </div>
   </nav>
 </div>

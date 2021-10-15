@@ -1,22 +1,26 @@
 import { Directive, Input, TemplateRef, ViewContainerRef } from '@angular/core';
 
+// notIf 指令 与 if 相反
 @Directive({
   selector: '[appNotIf]'
 })
 export class NotIfDirective {
-  private hasView = false;
+  // 元素是否展示
+  private showFlag = false;
 
   constructor(
     private templateRef: TemplateRef<any>,
     private viewContainer: ViewContainerRef) { }
 
+  // 输入条件 appNotIf
   @Input() set appNotIf(condition: boolean) {
-    if (!condition && !this.hasView) {
+    // condition 为 false showFlag 为 true 
+    if (!condition && !this.showFlag) {
       this.viewContainer.createEmbeddedView(this.templateRef);
-      this.hasView = true;
-    } else if (condition && this.hasView) {
+      this.showFlag = true;
+    } else if (condition && this.showFlag) {
       this.viewContainer.clear();
-      this.hasView = false;
+      this.showFlag = false;
     }
   }
 

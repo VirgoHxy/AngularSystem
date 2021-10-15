@@ -1,15 +1,30 @@
 import { InjectionToken } from "@angular/core";
 
+/**
+ * 全局配置
+ * @param title 应用标题
+ * @param accountType 账号类型
+ */
 export interface AppConfig {
   title: string;
   accountType: AccountType;
 }
 
+/**
+ * 账号数据
+ * @param type 账号类型
+ * @param name 账号名称
+ */
 export interface AccountData {
   type: number;
   name: string;
 }
 
+/**
+ * 账号类型
+ * @param defineArr 账号类型定义数组
+ * @function getTypeText 获取账号类型文字
+ */
 interface AccountType {
   defineArr: Array<{
     name: string;
@@ -19,10 +34,21 @@ interface AccountType {
   getTypeText: Function;
 }
 
+/**
+ * 侧边栏对象
+ * @param menuList 侧边栏数组
+ */
 export interface AppMenu {
   menuList: Array<Menu>;
 }
 
+/**
+ * 侧边栏对象
+ * @param name 路由名称
+ * @param text 文字
+ * @param active 是否激活
+ * @param hide 是否隐藏
+ */
 export interface Menu {
   name: string;
   text: string;
@@ -30,15 +56,20 @@ export interface Menu {
   hide?: boolean;
 }
 
+/**
+ * 全局css
+ * @param primaryColor 基础颜色
+ */
 export interface AppCss {
   primaryColor: string;
 }
 
+// 导出配置等
 export const APP_CONFIG = new InjectionToken<AppConfig>('app.config')
 
 export const APP_MENU = new InjectionToken<AppMenu>('app.menu')
 
-export const APP_CSS = new InjectionToken<AppMenu>('app.css')
+export const APP_CSS = new InjectionToken<AppCss>('app.css')
 
 export const APP_DI_CONFIG: AppConfig = {
   title: 'System',
@@ -57,7 +88,7 @@ export const APP_DI_CONFIG: AppConfig = {
 };
 
 export const APP_DI_MENU: AppMenu = {
-  menuList : [
+  menuList: [
     {
       name: "homePage",
       text: "首页"
@@ -73,6 +104,10 @@ export const APP_DI_MENU: AppMenu = {
     {
       name: "project",
       text: "项目管理"
+    },
+    {
+      name: "form",
+      text: "表单管理"
     }
   ]
 };

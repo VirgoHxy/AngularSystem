@@ -12,7 +12,7 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 
 ## Code scaffolding
 <!-- 创建一个模板组件 -->
-<!-- 创建指令，管道等 -->
+<!-- 创建指令(操作 dom 为元素添加额外行为的类)，管道，服务(获取数据 保存数据 协助通信 完成特定任务的方法)等 -->
 Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
 ## Build

@@ -1,13 +1,16 @@
 <div id="login">
   <!-- 响应式表单 显示创建FormControl -->
   <div [formGroup]="loginForm" (ngSubmit)="login()">
+    <!-- 标题 -->
     <h2 class="title">
       {{config.title}}
     </h2>
+    <!-- 项 -->
     <div class="formCont">
       <div class="formItem">
         用户名<span class="red">*</span>:
         <input type="text" formControlName="account" appForbiddenAccount="test" required>
+        <!-- 错误信息 -->
         <div *ngIf="account.invalid && (account.dirty || account.touched)" class="alert-danger">
           <div *ngIf="account.errors?.required">
             account is required.
@@ -20,14 +23,15 @@
       <div class="formItem">
         密&nbsp;&nbsp;&nbsp;码<span class="red">*</span>:
         <input type="password" formControlName="password" required>
+        <!-- 错误信息 -->
         <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert-danger">
           <div *ngIf="password.errors?.required">
             password is required.
           </div>
         </div>
       </div>
+      <!-- 动态添加项 -->
       <div formArrayName="others">
-
         <div class="formItem" *ngFor="let other of others.controls;let i = index;">
           <!-- The repeated alias template -->
           <label>
@@ -40,6 +44,7 @@
         </div>
       </div>
     </div>
+    <!-- 按钮 -->
     <button type="submit" [disabled]="!loginForm.valid" (click)="login()">登录({{ loginForm.status=="VALID" ? "√" : "×"
       }})</button>
   </div>

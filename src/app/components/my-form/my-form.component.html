@@ -1,0 +1,22 @@
+<div class="myForm">
+  <form (ngSubmit)="onSubmit()" [formGroup]="form">
+    <!-- 标题 -->
+    <h2 class="title" *ngIf="control.titleFlag">
+      {{element.title}}
+    </h2>
+    <!-- item主体 -->
+    <div class="formCont">
+      <div *ngFor="let formItem of element.formItems" class="formRow">
+        <app-my-form-item [formItem]="formItem" [form]="form"></app-my-form-item>
+      </div>
+    </div>
+    <!-- 按钮 -->
+    <div class="formRow">
+      <div *ngFor="let btn of element.btns">
+        <button type="submit" *ngIf="btn.name == 'submit'" [disabled]="!form.valid"
+          [style]="btn.style">{{btn.text}}</button>
+        <button *ngIf="btn.name != 'submit'" (click)="onButtonClick(btn.name)" [style]="btn.style">{{btn.text}}</button>
+      </div>
+    </div>
+  </form>
+</div>

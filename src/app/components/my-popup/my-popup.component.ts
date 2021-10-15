@@ -18,6 +18,7 @@ export class MyPopupComponent implements OnInit {
     }, 0);
   }
 
+  // 关闭popup
   exit() {
     this.showFlag = false;
     setTimeout(() => {

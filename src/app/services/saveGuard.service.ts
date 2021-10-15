@@ -6,7 +6,11 @@ import {
   RouterStateSnapshot
 } from '@angular/router';
 
+// 未保存离开服务 全局注册
+
+// 引入弹窗服务
 import { DialogService } from './dialog.service';
+// 引入组件
 import { HomePageComponent } from '../views/home/homeChildren/home-page/home-page.component';
 
 @Injectable({
@@ -21,12 +25,11 @@ export class SaveGuard implements CanDeactivate<HomePageComponent> {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> | boolean {
-    // Allow synchronous navigation (`true`) if no crisis or the crisis is unchanged
+    // 通过 HomePageComponent 的 canDeactivate 方法判断
     if (component.canDeactivate()) {
       return true;
     }
-    // Otherwise ask the user with the dialog service and return its
-    // observable which resolves to true or false when the user decides
+    // 返回 Observable 类型
     return this.dialogService.confirm('确认不保存这些数据?');
   }
 }

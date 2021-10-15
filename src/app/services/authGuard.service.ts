@@ -5,12 +5,13 @@ import { Observable } from 'rxjs';
 import { LoggerService } from './logger.service';
 import { setExpireStorage, getExpireStorage } from '../plugins/storage.plugin'
 
+// 授权验证服务
 @Injectable()
-
 export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
 
   constructor(private loggerService: LoggerService, private router: Router) { }
 
+  // 检测登录
   checkLogin(route?: ActivatedRouteSnapshot):Observable<boolean> {
     return new Observable((observer) => {
       // 拥有登录数据
@@ -28,6 +29,7 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
     });
   }
 
+  // 检测权限
   checkAuth(route: ActivatedRouteSnapshot):Observable<boolean> {
     return new Observable((observer) => {
       // 拥有数据
@@ -50,6 +52,7 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
     });
   }
 
+  // 是否可激活路由 false也会加载
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): boolean | Observable<boolean> | Promise<boolean> {
@@ -58,6 +61,7 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
     return this.checkAuth(route);
   }
   
+  // 是否可激活子路由
   canActivateChild(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): boolean | Observable<boolean> | Promise<boolean> {
@@ -66,6 +70,7 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
     return this.checkAuth(route);
   }
 
+  // 是否可加载
   canLoad(route: Route): boolean | Observable<boolean> | Promise<boolean> {
     return this.checkLogin();
   }
