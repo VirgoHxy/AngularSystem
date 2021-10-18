@@ -13,9 +13,9 @@
     <!-- 按钮 -->
     <div class="formRow">
       <div *ngFor="let btn of element.btns">
-        <button type="submit" *ngIf="btn.name == 'submit'" [disabled]="!form.valid"
+        <button type="submit" *ngIf="btn.name === 'submit'" [disabled]="!form.valid"
           [style]="btn.style">{{btn.text}}</button>
-        <button *ngIf="btn.name != 'submit'" (click)="onButtonClick(btn.name)" [style]="btn.style">{{btn.text}}</button>
+        <button *ngIf="btn.name !== 'submit'" (click)="onButtonClick(btn.name)" [style]="btn.style">{{btn.text}}</button>
       </div>
     </div>
   </form>

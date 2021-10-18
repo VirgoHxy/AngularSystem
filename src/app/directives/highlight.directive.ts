@@ -23,7 +23,7 @@ export class HighlightDirective {
 
   // 监听绑定元素移入
   @HostListener('mouseenter') onMouseEnter() {
-    this.highlight(`background-color: ${this.bgColor || this.css.primaryColor};color: ${this.fontColor || "#444"};`);
+    this.highlight(`background-color: ${this.bgColor || this.css.primaryColor};color: ${this.fontColor || '#444'};`);
   }
   
   // 监听绑定元素移出

@@ -11,7 +11,7 @@ export function getCurrRoute(router: Router): Route {
 
   let root = router.routerState.snapshot.root;
   let route: Route = {
-    name: ""
+    name: ''
   };
   while (root) {
     if (root.children && root.children.length) {

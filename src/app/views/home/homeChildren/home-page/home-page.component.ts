@@ -9,7 +9,7 @@ import { switchMap } from 'rxjs/operators';
 })
 export class HomePageComponent implements OnInit {
   // input 的值
-  text: string = "";
+  text: string = '';
   // 条件
   condition: boolean = false;
 
@@ -17,8 +17,8 @@ export class HomePageComponent implements OnInit {
 
   ngOnInit() {
     // 获取参数
-    console.log("id:" + this.activatedRoute.snapshot.paramMap.get('id')!);
-    console.log("num:" + this.activatedRoute.snapshot.paramMap.get('num')!);
+    console.log('id:' + this.activatedRoute.snapshot.paramMap.get('id')!);
+    console.log('num:' + this.activatedRoute.snapshot.paramMap.get('num')!);
     // 获取参数
     // this.activatedRoute.paramMap.pipe(
     //   switchMap((params: ParamMap) =>

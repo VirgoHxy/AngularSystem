@@ -1,5 +1,5 @@
-import { Directive, Input } from "@angular/core";
-import { ValidatorFn, AbstractControl, ValidationErrors, Validator, NG_VALIDATORS } from "@angular/forms";
+import { Directive, Input } from '@angular/core';
+import { ValidatorFn, AbstractControl, ValidationErrors, Validator, NG_VALIDATORS } from '@angular/forms';
 
 // 禁止输入验证器
 export function forbiddenTextValidator(textRe: RegExp, message?: string): ValidatorFn {

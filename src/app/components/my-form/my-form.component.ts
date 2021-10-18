@@ -2,13 +2,13 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MyFormItem } from '../my-form-item/my-form-item-base';
 import { MyFormItemService } from './my-form.service';
-import { FormModel } from './my-form-base'
+import { FormModel } from './my-form-base';
 
 @Component({
   selector: 'app-my-form',
   templateUrl: './my-form.component.html',
   styleUrls: ['./my-form.component.scss'],
-  providers: [MyFormItemService]
+  providers: [MyFormItemService],
 })
 export class MyFormComponent implements OnInit {
   // 输入的 form 模型
@@ -33,12 +33,14 @@ export class MyFormComponent implements OnInit {
     return this.formModel.other;
   }
 
-  constructor(private mfis: MyFormItemService) { }
+  constructor(private mfis: MyFormItemService) {}
 
   ngOnInit() {
     // 初始化
-    this.form = this.mfis.toFormGroup(this.element.formItems as MyFormItem<any>[]);
-    this.emit("formInit", this.form);
+    this.form = this.mfis.toFormGroup(
+      this.element.formItems as MyFormItem<any>[]
+    );
+    this.emit('formInit', this.form);
   }
 
   // 触发事件
@@ -46,17 +48,17 @@ export class MyFormComponent implements OnInit {
     this.formEvent.emit({
       name: this.control.name,
       type,
-      data
+      data,
     });
   }
 
   // 按钮提交
   onSubmit() {
-    this.emit("formBtn", "submit");
+    this.emit('formBtn', 'submit');
   }
 
   // 按钮点击
   onButtonClick(name: string) {
-    this.emit("formBtn", name);
+    this.emit('formBtn', name);
   }
 }

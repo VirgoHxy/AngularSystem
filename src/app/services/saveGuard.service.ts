@@ -11,7 +11,7 @@ import {
 // 引入弹窗服务
 import { DialogService } from './dialog.service';
 // 引入组件
-import { HomePageComponent } from '../views/home/homeChildren/home-page/home-page.component';
+import { HomePageComponent } from '@views/home/homeChildren/home-page/home-page.component';
 
 @Injectable({
   providedIn: 'root',

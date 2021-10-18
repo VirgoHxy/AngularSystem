@@ -1,10 +1,10 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, FormControl, FormArray, Validators, AbstractControl } from '@angular/forms';
-import { APP_CONFIG, AppConfig } from '../../app.config'
+import { APP_CONFIG, AppConfig } from '@app/app.config'
 import { map } from 'rxjs/operators';
-import { forbiddenTextValidator } from '../../directive/forbidden-text.directive'
-import { setExpireStorage, getExpireStorage } from '../../plugins/storage.plugin'
+import { forbiddenTextValidator } from '@directives/forbidden-text.directive'
+import { setExpireStorage, getExpireStorage } from '@services/storage.service'
 
 @Component({
   selector: 'app-login',
@@ -88,13 +88,13 @@ export class LoginComponent implements OnInit {
     if (checkLogin) {
       this.loginSuccess();
     } else {
-      alert("账号密码错误")
+      alert('账号密码错误')
     }
   }
 
   // 获取缓存
   getStorage() {
-    let accountData = getExpireStorage(sessionStorage, "accountData");
+    let accountData = getExpireStorage(sessionStorage, 'accountData');
     if (accountData) {
       this.loginForm.patchValue({
         account: accountData.account
@@ -105,14 +105,14 @@ export class LoginComponent implements OnInit {
   // 登录成功
   loginSuccess() {
     let { account, password } = this.loginForm.value;
-    setExpireStorage(sessionStorage, "accountData", {
+    setExpireStorage(sessionStorage, 'accountData', {
       account: account,
       password: password,
       name: account,
       type: 0
     });
-    setExpireStorage(sessionStorage, "accountRole", true);
-    this.router.navigate(["home"]);
+    setExpireStorage(sessionStorage, 'accountRole', true);
+    this.router.navigate(['home']);
   }
 
 }

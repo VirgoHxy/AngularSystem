@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { FormModel }  from '../../../../components/my-form//my-form-base'
+import { FormModel }  from '@components/my-form/my-form-base'
 import { LoginItemService } from './loginIModel.service';
 import { RegisterItemService } from './registerModel.service';
 
@@ -39,15 +39,15 @@ export class FormComponent implements OnInit {
   }) {
     let { name, type, data } = arg;
     switch (name) {
-      case "login":
+      case 'login':
         switch (type) {
-          case "formInit":
+          case 'formInit':
             this.loginFormInit(data);
             break;
-          case "formBtn":
+          case 'formBtn':
             this.loginFormBtn(data);
             break;
-          case "run": 
+          case 'run': 
             if (data && data.name) {
               this[data.name] && this[data.name](data.data);
             }
@@ -56,15 +56,15 @@ export class FormComponent implements OnInit {
             break;
         }
         break;
-      case "register":
+      case 'register':
         switch (type) {
-          case "formInit":
+          case 'formInit':
             this.registerFormInit(data);
             break;
-          case "formBtn":
+          case 'formBtn':
             this.registerFormBtn(data);
             break;
-          case "run": 
+          case 'run': 
             if (data && data.name) {
               this[data.name] && this[data.name](data.data);
             }

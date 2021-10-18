@@ -1,4 +1,4 @@
-import { InjectionToken } from "@angular/core";
+import { InjectionToken } from '@angular/core';
 
 /**
  * 全局配置
@@ -65,54 +65,53 @@ export interface AppCss {
 }
 
 // 导出配置等
-export const APP_CONFIG = new InjectionToken<AppConfig>('app.config')
+export const APP_CONFIG = new InjectionToken<AppConfig>('app.config');
 
-export const APP_MENU = new InjectionToken<AppMenu>('app.menu')
+export const APP_MENU = new InjectionToken<AppMenu>('app.menu');
 
-export const APP_CSS = new InjectionToken<AppCss>('app.css')
+export const APP_CSS = new InjectionToken<AppCss>('app.css');
 
 export const APP_DI_CONFIG: AppConfig = {
   title: 'System',
   accountType: {
     defineArr: [
       {
-        name: "admin",
+        name: 'admin',
         type: 0,
-        text: '超级管理员'
-      }
+        text: '超级管理员',
+      },
     ],
     getTypeText(type: number): string {
       return this.defineArr[type].text;
-    }
-  }
+    },
+  },
 };
 
 export const APP_DI_MENU: AppMenu = {
   menuList: [
     {
-      name: "homePage",
-      text: "首页"
+      name: 'homePage',
+      text: '首页',
     },
     {
-      name: "city",
-      text: "城市管理"
+      name: 'city',
+      text: '城市管理',
     },
     {
-      name: "group",
-      text: "集团管理"
+      name: 'group',
+      text: '集团管理',
     },
     {
-      name: "project",
-      text: "项目管理"
+      name: 'project',
+      text: '项目管理',
     },
     {
-      name: "form",
-      text: "表单管理"
-    }
-  ]
+      name: 'form',
+      text: '表单管理',
+    },
+  ],
 };
 
 export const APP_DI_CSS: AppCss = {
-  primaryColor: "#409eff"
+  primaryColor: '#409eff',
 };
-

@@ -1,15 +1,15 @@
 import { Component, OnInit, Inject, OnChanges, DoCheck, OnDestroy } from '@angular/core';
 import { Router, NavigationStart, NavigationEnd, NavigationCancel } from '@angular/router';
 import { filter } from 'rxjs/operators';
-import { APP_MENU, AppMenu, Menu } from '../../app.config';
-import { getCurrRoute }  from '../../plugins/angularUtils.plugin'
+import { APP_MENU, AppMenu, Menu } from '@app/app.config';
+import { getCurrRoute }  from '@services/angularUtils.service'
 
 @Component({
   selector: 'app-my-menu',
   templateUrl: './my-menu.component.html',
   styleUrls: ['./my-menu.component.scss']
 })
-export class MyMenuComponent implements OnInit, OnChanges, DoCheck, OnDestroy {
+export class MyMenuComponent implements OnInit {
   // 侧边栏对象
   menu: AppMenu;
   // 侧边栏列表
@@ -19,11 +19,6 @@ export class MyMenuComponent implements OnInit, OnChanges, DoCheck, OnDestroy {
 
   constructor(@Inject(APP_MENU) menu: AppMenu, private router: Router) { 
     this.menu = menu;
-  }
-
-  // 输入变化监听 
-  ngOnChanges() {
-
   }
 
   // 初始化
@@ -42,16 +37,6 @@ export class MyMenuComponent implements OnInit, OnChanges, DoCheck, OnDestroy {
     this.subscribeNavigationEnd();
     this.subscribeNavigationStart();
     this.subscribeNavigationCancel();
-  }
-
-  // 自定义变化监听
-  ngDoCheck() {
-
-  }
-
-  // 实例注销
-  ngOnDestroy() {
-
   }
 
   // 循环跟踪事件
@@ -87,7 +72,7 @@ export class MyMenuComponent implements OnInit, OnChanges, DoCheck, OnDestroy {
       menu.active = active;
       this.currMenu = menu;
     } else {
-      console.log("未获取到menu")
+      console.log('未获取到menu')
     }
   }
 

@@ -16,6 +16,7 @@ export class MyFormItemComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    console.log('初始化')
   }
 
 }

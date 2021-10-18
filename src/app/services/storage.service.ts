@@ -57,7 +57,7 @@ export function getExpireStorage(storage: Storage, key: string): any {
  */
 export function getCookie(name: string): string | undefined {
   let matches = document.cookie.match(new RegExp(
-    "(?:^|; )" + name.replace(/([.$?*|{}()[\]\\/+^])/g, '\\$1') + "=([^;]*)"
+    '(?:^|; )' + name.replace(/([.$?*|{}()[\]\\/+^])/g, '\\$1') + '=([^;]*)'
   ));
   return matches
     ? matches[1]
@@ -89,15 +89,15 @@ export function setCookie(name: string, value: string, opt = {}) {
   }
   let updatedCookie =
     encodeURIComponent(name) +
-    "=" +
+    '=' +
     encodeURIComponent(
-      typeof value == "object" ? JSON.stringify(value) : value
+      typeof value == 'object' ? JSON.stringify(value) : value
     );
   for (let optionKey in options) {
-    updatedCookie += "; " + optionKey;
+    updatedCookie += '; ' + optionKey;
     let optionValue = options[optionKey];
     if (optionValue !== true) {
-      updatedCookie += "=" + optionValue;
+      updatedCookie += '=' + optionValue;
     }
   }
   document.cookie = updatedCookie;
@@ -111,7 +111,7 @@ export function setCookie(name: string, value: string, opt = {}) {
  */
 export function deleteCookie(name: string) {
   // 设置到期时间 max-age(秒数) expires(时间)
-  setCookie(name, "", {
+  setCookie(name, '', {
     'max-age': -1
   });
 }
