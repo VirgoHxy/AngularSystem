@@ -14,8 +14,8 @@ import {
   APP_CSS,
   APP_DI_CONFIG,
   APP_DI_MENU,
-  APP_DI_CSS
-} from './app.config'
+  APP_DI_CSS,
+} from './app.config';
 
 // 组件
 import { AppComponent } from './app.component';
@@ -37,10 +37,16 @@ import { GroupComponent } from '@views/home/homeChildren/group/group.component';
 import { ProjectComponent } from '@views/home/homeChildren/project/project.component';
 import { FormComponent } from '@views/home/homeChildren/form/form.component';
 
-// 指令
+/* 指令 */
+// 属性指令
 import { HighlightDirective } from '@directives/highlight.directive';
+import { ShowDirective } from '@directives/show.directive';
+// 结构指令
 import { NotIfDirective } from '@directives/not-if.directive';
 import { ForbiddenValidatorDirective } from '@directives/forbidden-text.directive';
+
+// 管道
+import { MyDatePipe } from './pipes/date.pipe';
 
 /* 服务 */
 // 拦截器
@@ -69,8 +75,11 @@ import { httpInterceptorProviders } from '@services/http-interceptors/index';
     FormComponent,
     // 指令
     HighlightDirective,
+    ShowDirective,
     NotIfDirective,
-    ForbiddenValidatorDirective
+    ForbiddenValidatorDirective,
+    // 管道
+    MyDatePipe,
   ],
   imports: [
     BrowserModule,
@@ -80,7 +89,7 @@ import { httpInterceptorProviders } from '@services/http-interceptors/index';
     // http
     HttpClientModule,
     // 路由
-    AppRoutingModule
+    AppRoutingModule,
   ],
   providers: [
     { provide: APP_CONFIG, useValue: APP_DI_CONFIG },
@@ -88,6 +97,6 @@ import { httpInterceptorProviders } from '@services/http-interceptors/index';
     { provide: APP_CSS, useValue: APP_DI_CSS },
     httpInterceptorProviders,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

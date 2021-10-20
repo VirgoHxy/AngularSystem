@@ -2,7 +2,7 @@ import { Component, OnInit, Inject, OnChanges, DoCheck, OnDestroy } from '@angul
 import { Router, NavigationStart, NavigationEnd, NavigationCancel } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { APP_MENU, AppMenu, Menu } from '@app/app.config';
-import { getCurrRoute }  from '@services/angularUtils.service'
+import { getCurrRoute }  from '@app/services/angularUtils.plugin'
 
 @Component({
   selector: 'app-my-menu',

@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, FormControl, FormArray, Validators, AbstractCon
 import { APP_CONFIG, AppConfig } from '@app/app.config'
 import { map } from 'rxjs/operators';
 import { forbiddenTextValidator } from '@directives/forbidden-text.directive'
-import { setExpireStorage, getExpireStorage } from '@services/storage.service'
+import { setExpireStorage, getExpireStorage } from '@app/services/storage.plugin'
 
 @Component({
   selector: 'app-login',

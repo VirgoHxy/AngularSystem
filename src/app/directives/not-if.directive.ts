@@ -10,16 +10,16 @@ export class NotIfDirective {
 
   constructor(
     private templateRef: TemplateRef<any>,
-    private viewContainer: ViewContainerRef) { }
+    private viewContainerRef: ViewContainerRef) { }
 
   // 输入条件 appNotIf
   @Input() set appNotIf(condition: boolean) {
     // condition 为 false showFlag 为 true 
     if (!condition && !this.showFlag) {
-      this.viewContainer.createEmbeddedView(this.templateRef);
+      this.viewContainerRef.createEmbeddedView(this.templateRef);
       this.showFlag = true;
     } else if (condition && this.showFlag) {
-      this.viewContainer.clear();
+      this.viewContainerRef.clear();
       this.showFlag = false;
     }
   }

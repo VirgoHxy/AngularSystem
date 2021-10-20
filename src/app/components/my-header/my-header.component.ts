@@ -1,14 +1,12 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { APP_CONFIG, AppConfig, AccountData } from '@app/app.config'
-import { setExpireStorage, getExpireStorage } from '@services/storage.service'
-import { ConfigService, Config } from '@services/config.service'
+import { setExpireStorage, getExpireStorage } from '@app/services/storage.plugin'
 
 @Component({
   selector: 'app-my-header',
   templateUrl: './my-header.component.html',
-  styleUrls: ['./my-header.component.scss'],
-  providers: [ConfigService]
+  styleUrls: ['./my-header.component.scss']
 })
 export class MyHeaderComponent implements OnInit {
   // 全局配置
@@ -20,12 +18,8 @@ export class MyHeaderComponent implements OnInit {
     key: string;
     value: string;
   }> = [];
-  // json配置
-  config: Config = {
-    url: ''
-  };
 
-  constructor(@Inject(APP_CONFIG) appConfig: AppConfig, private router: Router, private configService: ConfigService) {
+  constructor(@Inject(APP_CONFIG) appConfig: AppConfig, private router: Router) {
     this.appConfig = appConfig;
   }
 
@@ -35,54 +29,7 @@ export class MyHeaderComponent implements OnInit {
     if (accountData) {
       this.accountData = accountData;
       this.getAccountDataList();
-      // this.showConfig();
-      this.showConfigResponse();
     }
-  }
-
-  // 获取配置 body
-  showConfig() {
-    this.configService.getConfig()
-      .subscribe((data: Config) => {
-        console.log(data);
-        console.log(data.url);
-        this.config = { ...data };
-      });
-  }
-
-  // 获取配置项 body
-  showConfigItem(key: string) {
-    this.configService.searchConfig(key)
-      .subscribe((data: any) => {
-        console.log(data);
-      });
-  }
-
-  // 获取配置整个 response
-  showConfigResponse() {
-    this.configService.getConfigResponse()
-      .subscribe(resp => {
-        const keys = resp.headers.keys();
-        const headers = keys.map(key =>
-          `${key}: ${resp.headers.get(key)}`);
-        console.log(resp);
-        console.log(resp.status);
-        console.log(resp.body);
-        console.log(headers);
-
-        this.config = { ...resp.body! };
-      });
-  }
-
-  // 添加编辑配置
-  addOrupdateConfig(url: string) {
-    this.configService
-      .addOrUpdateConfig({
-        url
-      })
-      .subscribe(data => {
-        console.log(data);
-      });
   }
 
   // 将对象转换为数组

@@ -1,5 +1,7 @@
 <div class="myForm">
   <form (ngSubmit)="onSubmit()" [formGroup]="form">
+    <!-- 关闭 -->
+    <button type="button" class="close" (click)="onCloseForm()">关闭</button>
     <!-- 标题 -->
     <h2 class="title" *ngIf="control.titleFlag">
       {{element.title}}

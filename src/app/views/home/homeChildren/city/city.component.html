@@ -1,3 +1,39 @@
 <div id="city">
-  城市
+  <!-- table头 -->
+  <div class="tableHead">
+    <div>
+      <input type="text" [(ngModel)]="nameSearch">
+      <button type="button" (click)="searchForm()">查询</button>
+    </div>
+    <button type="button" (click)="addForm()">添加</button>
+  </div>
+  <!-- table -->
+  <table border>
+    <thead>
+      <tr>
+        <th>城市名称</th>
+        <th>创建日期</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of cityList;let i = index;">
+        <td>{{item.name}}</td>
+        <td>{{item.date | myDate: "YYYY-MM-DD hh:mm:ss"}}</td>
+        <td>
+          <div class="btns">
+            <button type="button" (click)="editForm(item)">编辑</button>
+            <button type="button" (click)="deleteData(item)">删除</button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <!-- form dialog -->
+  <div class="dialog" [style.display]="formShow ? 'block' : 'none'">
+    <div class="shadow"></div>
+    <div class="dialogCont">
+      <app-my-form [formModel]="formModel" (formEvent)="formEvent($event)"></app-my-form>
+    </div>
+  </div>
 </div>

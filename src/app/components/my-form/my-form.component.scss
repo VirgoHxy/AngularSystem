@@ -3,10 +3,17 @@
   height: 100%;
 
   .myForm {
+    position: relative;
     text-align: left;
     box-shadow: 0 2px 12px 0 rgb(0 0 0 / 30%);
     padding: 20px;
     max-width: 400px;
+
+    .close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+    }
 
     .title {
       margin: 0;

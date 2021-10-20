@@ -3,7 +3,7 @@ import { Route } from '@angular/compiler/src/core';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { LoggerService } from './logger.service';
-import { setExpireStorage, getExpireStorage } from './storage.service'
+import { setExpireStorage, getExpireStorage } from './storage.plugin'
 
 // 授权验证服务
 @Injectable()

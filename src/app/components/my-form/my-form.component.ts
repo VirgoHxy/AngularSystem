@@ -61,4 +61,11 @@ export class MyFormComponent implements OnInit {
   onButtonClick(name: string) {
     this.emit('formBtn', name);
   }
+
+  // 关闭表单
+  onCloseForm() {
+    this.emit('run', {
+      name: 'closeForm'
+    });
+  }
 }

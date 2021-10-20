@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Menu } from '@app/app.config';
 import { MyBodyComponent } from '../my-body/my-body.component'
-import { getCurrRoute }  from '@services/angularUtils.service'
+import { getCurrRoute }  from '@app/services/angularUtils.plugin'
 
 @Component({
   selector: 'app-my-menu-item',
