@@ -1,48 +1,52 @@
+// getRegularTime参数
+interface RegularTimeParam {
+  (value: string | number | Date | RegularTimeObject): Date | null;
+}
+
+// format参数
+interface FormatParam {
+  (value: string | number | Date | RegularTimeObject, formatStr?: string): string;
+}
+
+// RegularTimeObject 参数
+interface RegularTimeObject {
+  type: string;
+  data: any;
+}
+
 /**
  * 获取合规时间
  *
- * @param {object | string | number} value 时间字符串
+ * @param {string | number | Date | object} value 时间值
  *
  * @returns {Date | null} 返回时间对象
  */
-export function getRegularTime(
-  value: object | string | number
-): Date | null {
-
-  let getType = function (o: any) {
-    let s = Object.prototype.toString.call(o);
-    let match = s.match(/\[object (.*?)\]/);
-    if (match && match[1]) {
-      return match[1].toLowerCase();
-    } else {
-      return null;
-    }
-  };
-
-  if (getType(value) == 'string') {
-    let match = (value as string).match(/\.([\d]{1,})[Z]*/);
-    let ms = (match && Number(match[1])) || 0;
-    if (/T/g.test(value as string)) {
-      // 去T
-      value = (value as string).replace(/T/g, ' ');
-    }
-    if (/\./g.test(value as string)) {
-      // 去毫秒 兼容ios ie firefox
-      value = (value as string).replace(/\.[\d]{1,}[Z]*/, '');
-    }
-    if (/-/g.test(value as string)) {
-      // new Date兼容ios ie firefox
-      value = (value as string).replace(/-/g, '/');
-    }
-    let date = new Date(value as string);
-    date.setMilliseconds(ms);
+export let getRegularTime: RegularTimeParam = function (value) {
+  if (typeof value == 'string') {
+    // 下面处理未考虑时区问题
+    // let match = value.match(/\.([\d]{1,})[Z]*/);
+    // let ms = (match && Number(match[1])) || 0;
+    // if (/T/g.test(value)) {
+    //   // 去T
+    //   value = value.replace(/T/g, ' ');
+    // }
+    // if (/\./g.test(value)) {
+    //   // 去毫秒 兼容ios ie firefox
+    //   value = value.replace(/\.[\d]{1,}[Z]*/, '');
+    // }
+    // if (/-/g.test(value)) {
+    //   // new Date兼容ios ie firefox
+    //   value = value.replace(/-/g, '/');
+    // }
+    let date = new Date(value);
+    // date.setMilliseconds(ms);
     return date;
-  } else if (getType(value) == 'number') {
-    return new Date(value as number);
-  } else if (getType(value) == 'date') {
-    return value as Date;
-  } else if (getType(value) == 'object') {
-    let { type, data } = value as { type: string; data: any };
+  } else if (typeof value == 'number') {
+    return new Date(value);
+  } else if (value instanceof Date) {
+    return value;
+  } else if (typeof value == 'object') {
+    let { type, data } = value as RegularTimeObject;
     switch (type) {
       case 'xlsx':
         return getDate2XLSX(data);
@@ -53,12 +57,12 @@ export function getRegularTime(
   } else {
     return null;
   }
-}
+};
 
 /**
  * 获取xlsx合规时间
  *
- * @param {number} value 时间数字
+ * @param {number} serial 时间数字
  *
  * @returns {Date} 返回时间对象
  */
@@ -86,12 +90,15 @@ export function getDate2XLSX(serial: number): Date {
 /**
  * 格式化时间(依赖getRegularTime方法)
  *
- * @param {object | string | number} value 时间值
+ * @param {string | number | Date | object} value 时间值
  * @param {string} [formatStr = "YYYY-MM-DD hh:mm:ss"] 格式化规则
  *
  * @returns {string} 返回字符串时间
  */
-export function format(value: object | string | number, formatStr?: string): string {
+export let format: FormatParam = function (
+  value,
+  formatStr ='YYYY-MM-DD hh:mm:ss'
+) {
   let myDate = getRegularTime(value);
   if (!myDate) {
     return '请输入正确的日期';
@@ -99,7 +106,7 @@ export function format(value: object | string | number, formatStr?: string): str
   if (isNaN(myDate.getTime())) {
     return '请输入正确的日期';
   }
-  let str = formatStr || 'YYYY-MM-DD hh:mm:ss',
+  let str = formatStr,
     week = [
       '星期日',
       '星期一',

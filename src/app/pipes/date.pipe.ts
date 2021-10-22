@@ -7,8 +7,6 @@ import { format } from '@app/services/date.plugin'
 })
 export class MyDatePipe implements PipeTransform {
 
-  transform(value: object | string | number, formatStr?: string): string {
-    return format(value, formatStr);
-  }
+  transform = format;
 
 }
