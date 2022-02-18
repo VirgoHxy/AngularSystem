@@ -1,22 +1,26 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
+import { filter } from 'rxjs/operators';
+
+/* service */
 // http
 import { CityService, InsertOrUpdateOneParam, City } from './city.service';
 // msg
-import { LoggerService } from '@app/services/logger.service';
+import { LoggerService } from '@services/logger.service';
 // 格式化时间
-import { format } from '@app/services/date.plugin';
+import { format } from '@plugins/date.plugin';
+import { LoadingService } from '@services/loading.service';
 
 // 表单
 import { FormGroup } from '@angular/forms';
-import { FormModel } from '@components/my-form/my-form-base';
+import { FormModel } from '@components/shared/my-form/my-form-base';
 import { FormService } from './formModel.service';
 
 @Component({
   selector: 'app-city',
   templateUrl: './city.component.html',
   styleUrls: ['./city.component.scss'],
-  providers: [CityService, LoggerService, FormService],
+  providers: [CityService, FormService],
 })
 export class CityComponent implements OnInit {
   // 列表
@@ -35,16 +39,25 @@ export class CityComponent implements OnInit {
   formId!: number;
   // 查询name
   nameSearch!: string;
-  // 这个用来执行 run 传来的方法
-  [propName: string]: any;
+  // [propName: string]: any;
 
   constructor(
-    private cityService: CityService,
+    private router: Router,
     private loggerService: LoggerService,
+    private loadingService: LoadingService,
+    private cityService: CityService,
     private formService: FormService,
-    private router: Router
   ) {
-    this.formModel = formService.getFormModel();
+    this.formModel = this.formService.getFormModel();
+    this.router.events
+      .pipe(filter((event: any) => event instanceof NavigationEnd))
+      .subscribe((event: NavigationEnd) => {
+        // 这里需要判断一下当前路由，如果不加的话，每次路由结束的时候都会执行这里的方法
+        if (event.url === '/home/city') {
+          // 在这写需要执行初始化的方法
+          console.log('city: 执行初始化')
+        }
+      });
   }
 
   ngOnInit() {
@@ -53,6 +66,7 @@ export class CityComponent implements OnInit {
 
   // 分页获取
   getList() {
+    this.loadingService.change(true, '数据加载中,请稍等...');
     this.cityService
       .getList({
         pageIndex: 0,
@@ -60,8 +74,9 @@ export class CityComponent implements OnInit {
         name: this.nameSearch,
       })
       .subscribe((res) => {
+        this.loadingService.change(false);
         if (!res.status) {
-          this.loggerService.log(res.errMsg);
+          this.loggerService.log(res.errMsg || res.message);
           return;
         }
         this.cityList = res.data;
@@ -107,10 +122,8 @@ export class CityComponent implements OnInit {
       case 'formBtn':
         this.formBtn(data);
         break;
-      case 'run':
-        if (data && data.name) {
-          this[data.name] && this[data.name](data.data);
-        }
+      case 'closeForm':
+        this.closeForm();
         break;
       default:
         break;

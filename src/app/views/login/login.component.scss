@@ -2,17 +2,13 @@
   display: block;
   height: 100%;
 
-  .red {
-    color: var(--red)
-  }
-
   #login {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: left;
-    box-shadow: 0 2px 12px 0 rgb(0 0 0 / 30%);
+    box-shadow: 0 2px 12px 0 var(--shadowColor);
     padding: 20px;
 
     h2 {
@@ -26,16 +22,16 @@
         position: relative;
         margin-bottom: 20px;
         input {
-          border: 1px solid #999;
+          border: 1px solid var(--borderColor);
           outline: none;
           height: 20px;
         }
         .ng-valid[required], .ng-valid.required {
-          border-color: var(--green);
+          border-color: var(--successColor);
         }
         
         .ng-invalid:not(form) {
-          border-color: var(--red);
+          border-color: var(--dangerColor);
         }
         &:last-child {
           margin-bottom: 0;
@@ -51,8 +47,13 @@
       }
 
       .alert-danger {
-        margin-top: 20px;
-        color: var(--red)
+        position: absolute;
+        font-size: 14px;
+        color: var(--dangerColor)
+      }
+
+      .tip {
+        color: var(--dangerColor)
       }
     }
 

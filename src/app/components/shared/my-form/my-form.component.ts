@@ -64,8 +64,6 @@ export class MyFormComponent implements OnInit {
 
   // 关闭表单
   onCloseForm() {
-    this.emit('run', {
-      name: 'closeForm'
-    });
+    this.emit('closeForm');
   }
 }

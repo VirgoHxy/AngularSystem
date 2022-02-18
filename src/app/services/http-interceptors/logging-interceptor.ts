@@ -7,6 +7,7 @@ import {
 import { Injectable } from '@angular/core';
 import { finalize, tap } from 'rxjs/operators';
 import { LoggerService } from '../logger.service';
+import configJson from '@assets/config.json';
 
 // 记录请求
 @Injectable()
@@ -21,7 +22,7 @@ export class LoggingInterceptor implements HttpInterceptor {
     return next.handle(req).pipe(
       tap(
         // 成功调用
-        (event) => (ok = event instanceof HttpResponse ? 'succeeded' : ''),
+        () => (ok = event instanceof HttpResponse ? 'succeeded' : ''),
         // 错误调用
         (error) => (ok = 'failed')
       ),
@@ -29,7 +30,7 @@ export class LoggingInterceptor implements HttpInterceptor {
       finalize(() => {
         const elapsed = Date.now() - started;
         const msg = `${req.method} "${req.urlWithParams}" ${ok} in ${elapsed} ms.`;
-        this.logger.log(msg);
+        configJson.debug && this.logger.log(msg);
       })
     );
   }

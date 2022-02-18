@@ -1,7 +1,11 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { APP_CONFIG, AppConfig, AccountData } from '@app/app.config'
-import { setExpireStorage, getExpireStorage } from '@app/services/storage.plugin'
+import { select, Store } from '@ngrx/store';
+
+import { APP_CONFIG, AppConfig } from '@app/app.config'
+import { AccountData } from '@app/interface'
+import { setExpireStorage, getExpireStorage } from '@plugins/storage.plugin'
+import { AppStore } from '@stores/index';
 
 @Component({
   selector: 'app-my-header',
@@ -19,17 +23,22 @@ export class MyHeaderComponent implements OnInit {
     value: string;
   }> = [];
 
-  constructor(@Inject(APP_CONFIG) appConfig: AppConfig, private router: Router) {
+  constructor(@Inject(APP_CONFIG) appConfig: AppConfig, private router: Router, private store: Store<AppStore>) {
     this.appConfig = appConfig;
   }
 
   ngOnInit() {
-    // console.log("header初始化")
+    console.log('header初始化')
     let accountData = getExpireStorage(sessionStorage, 'accountData');
     if (accountData) {
       this.accountData = accountData;
       this.getAccountDataList();
     }
+    this.store.select('login').subscribe((state) => {
+      let {accountInfo, accountData} = state;
+      console.log(accountInfo)
+      console.log(accountData)
+    });
   }
 
   // 将对象转换为数组
@@ -54,6 +63,13 @@ export class MyHeaderComponent implements OnInit {
       }
       this.accountDataList.push(listObj);
     }
+  }
+
+  change() {
+    let theme = document.documentElement.getAttribute('data-theme');
+    theme = theme == 'light' ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', theme);
+    setExpireStorage(localStorage, 'theme', theme);
   }
 
   // 退出

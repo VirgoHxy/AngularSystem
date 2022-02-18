@@ -5,9 +5,10 @@
   .myForm {
     position: relative;
     text-align: left;
-    box-shadow: 0 2px 12px 0 rgb(0 0 0 / 30%);
+    box-shadow: 0 2px 12px 0 var(--moreLightShadowColor);
     padding: 20px;
     max-width: 400px;
+    margin: 60px auto;
 
     .close {
       position: absolute;

@@ -1,5 +1,4 @@
 import { Directive, Inject, ElementRef, HostListener, Input } from '@angular/core';
-import { APP_CSS, AppCss }  from '../app.config';
 
 // 高亮指令
 @Directive({
@@ -7,8 +6,6 @@ import { APP_CSS, AppCss }  from '../app.config';
 })
 
 export class HighlightDirective {
-  // 样式对象
-  css: AppCss;
   // 当前元素
   el: ElementRef;
   // 输入背景颜色
@@ -16,14 +13,13 @@ export class HighlightDirective {
   // 输入字体颜色
   @Input() fontColor = '';
 
-  constructor(@Inject(APP_CSS) css: AppCss, el: ElementRef) {
+  constructor( el: ElementRef) {
     this.el = el;
-    this.css = css;
   }
 
   // 监听绑定元素移入
   @HostListener('mouseenter') onMouseEnter() {
-    this.highlight(`background-color: ${this.bgColor || this.css.primaryColor};color: ${this.fontColor || '#444'};`);
+    this.highlight(`background-color: ${this.bgColor || 'var(--primary)'};color: ${this.fontColor || '#444'};`);
   }
   
   // 监听绑定元素移出

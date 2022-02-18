@@ -2,8 +2,10 @@ import { CanActivate, CanActivateChild, CanLoad, ActivatedRouteSnapshot, RouterS
 import { Route } from '@angular/compiler/src/core';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+
+import { AccountData } from '@app/interface';
 import { LoggerService } from './logger.service';
-import { setExpireStorage, getExpireStorage } from './storage.plugin'
+import { getExpireStorage } from '@plugins/storage.plugin'
 
 // 授权验证服务
 @Injectable()
@@ -15,7 +17,8 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
   checkLogin(route?: ActivatedRouteSnapshot):Observable<boolean> {
     return new Observable((observer) => {
       // 拥有登录数据
-      if (!getExpireStorage(sessionStorage, 'accountData')) {
+      let accountData: AccountData = getExpireStorage(sessionStorage, 'accountData');
+      if (!accountData) {
         this.loggerService.log((route ? route.url : '') + '未登录，返回到登录页');
         this.router.navigate(['/'], {
           queryParams: { id: +new Date() },

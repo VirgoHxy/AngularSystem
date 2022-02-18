@@ -1,7 +1,7 @@
 :host {
   display: block;
   height: calc(100% - 60px);
-  background-color: #e8e8e8;
+  background-color: var(--lightBackgroundColor);
 
   .myBody {
     display: flex;
@@ -12,7 +12,7 @@
       height: calc(100% - 42px);
       padding: 0;
       margin: 20px;
-      background-color: #fff;
+      background-color: var(--backgroundColor);
     }
   }
 }

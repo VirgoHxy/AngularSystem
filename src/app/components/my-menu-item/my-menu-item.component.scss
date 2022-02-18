@@ -9,17 +9,18 @@
     box-sizing: border-box;
     white-space: nowrap;
     font-size: .8rem;
-    color: #fff;
+    color: var(--white);
+    user-select: none;
     cursor: pointer;
     transition: border-color .3s, background-color .3s, color .3s;
 
     &.active {
-      background-color: hsla(0, 0%, 100%, .733) !important;
-      color: var(--primary) !important;
+      background-color: var(--lessTransparentWhite) !important;
+      color: var(--primaryColor) !important;
     }
 
     &:hover {
-      background-color: hsla(0, 0%, 100%, .267);
+      background-color: var(--transparentWhite);
     }
   }
 }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { FormModel } from '@components/my-form/my-form-base'
-import { MyFormItem, TextboxItem } from '@components/my-form-item/my-form-item-base'
-import { forbiddenTextValidator } from '@directives/forbidden-text.directive'
+import { FormModel } from '@components/shared/my-form/my-form-base'
+import { MyFormItem, TextboxItem } from '@components/shared/my-form-item/my-form-item-base'
+import { forbiddenTextValidator } from '@directives/shared/forbidden-text.directive'
 
 @Injectable()
 

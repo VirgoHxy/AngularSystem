@@ -1,38 +1,49 @@
-import { Component, OnInit, Inject, OnChanges, DoCheck, OnDestroy } from '@angular/core';
-import { Router, NavigationStart, NavigationEnd, NavigationCancel } from '@angular/router';
+import {
+  Component,
+  OnInit,
+  Inject,
+  OnChanges,
+  DoCheck,
+  OnDestroy,
+} from '@angular/core';
+import {
+  Router,
+  NavigationStart,
+  NavigationEnd,
+  NavigationCancel,
+} from '@angular/router';
 import { filter } from 'rxjs/operators';
-import { APP_MENU, AppMenu, Menu } from '@app/app.config';
-import { getCurrRoute }  from '@app/services/angularUtils.plugin'
+
+import { APP_MENU, AppMenu, Menu, APP_DI_MENU } from '@views/home/home.config';
+import { getCurrRoute } from '@plugins/angularUtils.plugin';
 
 @Component({
   selector: 'app-my-menu',
   templateUrl: './my-menu.component.html',
-  styleUrls: ['./my-menu.component.scss']
+  styleUrls: ['./my-menu.component.scss'],
+  providers: [{ provide: APP_MENU, useValue: APP_DI_MENU }],
 })
 export class MyMenuComponent implements OnInit {
   // 侧边栏对象
-  menu: AppMenu;
+  appMenu: AppMenu;
   // 侧边栏列表
   menuList: Array<Menu> = [];
   // 当前侧边栏
   currMenu!: Menu;
 
-  constructor(@Inject(APP_MENU) menu: AppMenu, private router: Router) { 
-    this.menu = menu;
+  constructor(@Inject(APP_MENU) appMenu: AppMenu, private router: Router) {
+    this.appMenu = appMenu;
   }
 
   // 初始化
   ngOnInit() {
     // 侧边栏初始化
-    this.menu.menuList.forEach(element => {
+    this.appMenu.menuList.forEach((element) => {
       let ele = JSON.parse(JSON.stringify(element));
-      this.menuList.push(Object.assign(ele, {
-        active: false
-      }))
+      this.menuList.push(ele);
     });
     // 获取当前路由
-    let currRoute = getCurrRoute(this.router);
-    this.changeActive(currRoute.name, true);
+    this.setCurrMenu();
     // 订阅路由事件
     this.subscribeNavigationEnd();
     this.subscribeNavigationStart();
@@ -40,40 +51,45 @@ export class MyMenuComponent implements OnInit {
   }
 
   // 循环跟踪事件
-  trackByFn(index: number, item: Menu): string { return item.name; }
+  trackByFn(index: number, item: Menu): string {
+    return item.name;
+  }
 
   // 导航结束
   subscribeNavigationEnd() {
-    this.router.events.pipe(filter((event: any) => event instanceof NavigationEnd)).subscribe(() => {
-      let currRoute = getCurrRoute(this.router);
-      this.changeActive(currRoute.name, true);
-    });
+    this.router.events
+      .pipe(filter((event: any) => event instanceof NavigationEnd))
+      .subscribe(() => {
+        this.setCurrMenu();
+      });
   }
 
   // 导航开始
   subscribeNavigationStart() {
-    this.router.events.pipe(filter((event: any) => event instanceof NavigationStart)).subscribe(() => {
-      let currRoute = getCurrRoute(this.router);
-      this.changeActive(currRoute.name, false);
-    });
+    this.router.events
+      .pipe(filter((event: any) => event instanceof NavigationStart))
+      .subscribe(() => {
+        this.setCurrMenu();
+      });
   }
 
   // 导航取消
   subscribeNavigationCancel() {
-    this.router.events.pipe(filter((event: any) => event instanceof NavigationCancel)).subscribe(() => {
-      this.changeActive(this.currMenu.name, true);
-    });
+    this.router.events
+      .pipe(filter((event: any) => event instanceof NavigationCancel))
+      .subscribe(() => {
+        this.setCurrMenu(this.currMenu.name);
+      });
   }
 
-  // 改变路由 active 状态
-  changeActive(name: string, active: boolean) {
-    let menu = this.menuList.find(ele => ele.name == name);
+  // 赋值当前路由
+  setCurrMenu(name?: string) {
+    name = name ? name : getCurrRoute(this.router).name;
+    let menu = this.menuList.find((ele) => ele.name == name);
     if (menu) {
-      menu.active = active;
       this.currMenu = menu;
     } else {
-      console.log('未获取到menu')
+      console.log('未获取到menu');
     }
   }
-
 }

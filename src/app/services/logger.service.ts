@@ -6,10 +6,13 @@ import { Injectable } from '@angular/core';
 })
 
 export class LoggerService {
-  logs: string[] = []; // 存储日志信息
+  logs: any[] = []; // 存储日志信息
 
-  log(message: string) {
-    this.logs.push(message);
-    console.log(message);
+  log(message: any, ...args: any[]) {
+    this.logs.push({
+      message,
+      args
+    });
+    console.log(message, ...args);
   }
 }

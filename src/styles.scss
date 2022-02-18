@@ -1,12 +1,35 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body {
-  --primary: #409eff;
-  --red: #e00;
+:root, html {
+  --black: #000000;
+  --blue: #409EFF;
+  --deepBlue: #1F8DFF;
+  --deepGray: #37383B;
+  --deepGreen: #27972D;
+  --gray: #666666;
   --green: #42A948;
-  --blue: #409eff;
+  --lessTransparentBlack: #000EE;
+  --lessTransparentWhite: #FFFEE;
+  --lightGray: #999999;
+  --lightWhite: #E6E6E6;
+  --moreDeepGray: #232529;
+  --moreLightGray: #BBBBBB;
+  --orange: #FFBA08;
+  --purple: #551A8B;
+  --red: #F94144;
+  --transparentBlack: #00044;
+  --transparentWhite: #FFF44;
+  --white: #FFFFFF;
+}
+
+html, body {
+  display: block;
+
   margin: 0;
   padding: 0;
+
+  color: var(--textColor);
+  background-color: var(--backgroundColor);
 }
 
 h1, h2, h3, h4, h5, h6 {

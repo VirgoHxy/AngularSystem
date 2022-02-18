@@ -5,10 +5,10 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Development server
 <!-- 测试服务 -->
-<!-- http://localhost:4200 -->
+<!-- http://localhost:8887 -->
 <!-- 热更新 -->
 <!-- -o 可默认打开网页 -->
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Run `ng serve` for a dev server. Navigate to `http://localhost:8887/`. The app will automatically reload if you change any of the source files.
 
 ## Code scaffolding
 <!-- 创建一个模板组件 -->

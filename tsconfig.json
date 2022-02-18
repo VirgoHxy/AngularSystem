@@ -4,13 +4,21 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "@app/*": ["src/app/*"],
       "@env/*": ["src/environments/*"],
+      "@assets/*": ["src/assets/*"],
       "@components/*": ["src/app/components/*"],
       "@directives/*": ["src/app/directives/*"],
+      "@pipes/*": ["src/app/pipes/*"],
+      "@plugins/*": ["src/app/plugins/*"],
       "@services/*": ["src/app/services/*"],
+      "@stores/*": ["src/app/stores/*"],
       "@views/*": ["src/app/views/*"],
+      "@app/*": ["src/app/*"]
     },
+    // 可以import json
+    "resolveJsonModule": true,
+    // 不包含默认导出允许defalut import
+    "allowSyntheticDefaultImports": true,
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "strict": true,
@@ -24,10 +32,7 @@
     "importHelpers": true,
     "target": "es2017",
     "module": "es2020",
-    "lib": [
-      "es2018",
-      "dom"
-    ]
+    "lib": ["es2018", "dom"]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { of } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { AuthService } from '@services/auth.service';
 
@@ -97,8 +97,6 @@ export class CityService {
       })
     };
     return this.http.post<any>(this.insertOrUpdateUrl, param, httpOptions).pipe(
-      // 重试3次
-      retry(3),
       // 捕获错误
       catchError(this.handleError)
     );
@@ -115,8 +113,6 @@ export class CityService {
       })
     };
     return this.http.post<any>(this.deleteUrl, param, httpOptions).pipe(
-      // 重试3次
-      retry(3),
       // 捕获错误
       catchError(this.handleError)
     );
@@ -134,7 +130,6 @@ export class CityService {
         `body was: ${error.error}`);
     }
     // 返回错误
-    return throwError(
-      '出现错误，请稍后重试');
+    return of(new Error('出现错误，请稍后重试'));
   }
 }

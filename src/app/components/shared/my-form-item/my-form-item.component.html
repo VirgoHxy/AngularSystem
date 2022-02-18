@@ -1,7 +1,7 @@
 <div class="myFormItem" [formGroup]="form">
   <!-- 标签 -->
   <label [attr.for]="formItem.key">{{formItem.label}}<span *ngIf="formItem?.validators?.required"
-      class="colorRed">*</span></label>
+      class="tip">*</span></label>
   <!-- 项 -->
   <div [ngSwitch]="formItem.controlType" class="item">
     <input *ngSwitchCase="'textbox'" [formControlName]="formItem.key" [id]="formItem.key" [type]="formItem.type"

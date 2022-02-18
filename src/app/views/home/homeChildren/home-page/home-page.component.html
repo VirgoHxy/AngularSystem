@@ -18,12 +18,12 @@
   <button (click)="popup()">popup</button>
   <button (click)="condition=!condition">toggle</button>
   <!-- appHighlight 属性指令高亮 -->
-  <div appHighlight bgColor="#f3ab28" fontColor="#fff">
+  <div>
     <!-- appNotIf 结构指令 notIf -->
-    <p *appNotIf="condition" class="unless a">
+    <p *appNotIf="condition" class="unless a" appHighlight bgColor="var(--orange)" fontColor="#fff">
       (A) This paragraph is displayed because the condition is false.
     </p>
-    <p *appNotIf="!condition" class="unless b">
+    <p *appNotIf="!condition" class="unless b" appHighlight fontColor="#fff">
       (B) Although the condition is true,
       this paragraph is displayed because appUnless is set to false.
     </p>

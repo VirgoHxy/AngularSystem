@@ -2,7 +2,148 @@
   position: relative;
   display: block;
   height: 100vh;
+
   #app {
     height: 100%;
+
+    .loadingCont {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      background: var(--transparentBackgroundColor);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100vw;
+      height: 100vh;
+      z-index: 1998;
+
+      .animation {
+        position: absolute;
+        margin: auto;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 6.250em;
+        height: 6.250em;
+        animation: rotate 2.4s linear infinite;
+
+        .dot {
+          position: absolute;
+          margin: auto;
+          width: 2.4em;
+          height: 2.4em;
+          border-radius: 100%;
+          transition: all 1s ease;
+        }
+
+        .dot:nth-child(2) {
+          top: 0;
+          bottom: 0;
+          left: 0;
+          background: var(--red);
+          animation: dotsY 2.4s linear infinite;
+        }
+
+        .dot:nth-child(3) {
+          left: 0;
+          right: 0;
+          top: 0;
+          background: var(--orange);
+          animation: dotsX 2.4s linear infinite;
+        }
+
+        .dot:nth-child(4) {
+          top: 0;
+          bottom: 0;
+          right: 0;
+          background: var(--green);
+          animation: dotsY 2.4s linear infinite;
+        }
+
+        .dot:nth-child(5) {
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: var(--blue);
+          animation: dotsX 2.4s linear infinite;
+        }
+
+      }
+
+      .text {
+        margin-top: 12em;
+        letter-spacing: 1px;
+        font-size: 14px;
+        text-align: center;
+        color: var(--primaryColor);
+      }
+
+      @keyframes rotate {
+        0% {
+          transform: rotate(0);
+        }
+
+        10% {
+          width: 6.250em;
+          height: 6.250em;
+        }
+
+        66% {
+          width: 2.4em;
+          height: 2.4em;
+        }
+
+        100% {
+          transform: rotate(360deg);
+          width: 6.250em;
+          height: 6.250em;
+        }
+      }
+
+      @keyframes dotsY {
+        66% {
+          opacity: .1;
+          width: 2.4em;
+        }
+
+        77% {
+          opacity: 1;
+          width: 0;
+        }
+      }
+
+      @keyframes dotsX {
+        66% {
+          opacity: .1;
+          height: 2.4em;
+        }
+
+        77% {
+          opacity: 1;
+          height: 0;
+        }
+      }
+
+      @keyframes flash {
+        33% {
+          opacity: 0;
+          border-radius: 0%;
+        }
+
+        55% {
+          opacity: .6;
+          border-radius: 100%;
+        }
+
+        66% {
+          opacity: 0;
+        }
+      }
+    }
   }
 }

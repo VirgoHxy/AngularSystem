@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { FormModel }  from '@components/my-form/my-form-base'
+import { FormModel }  from '@components/shared/my-form/my-form-base'
 import { LoginItemService } from './loginIModel.service';
 import { RegisterItemService } from './registerModel.service';
 
@@ -19,8 +19,6 @@ export class FormComponent implements OnInit {
   loginFormModel: FormModel;
   // 注册表单模型
   registerFormModel: FormModel;
-  // 这个用来执行 run 传来的方法
-  [propName: string]: any;
 
   constructor(lis: LoginItemService, ris: RegisterItemService) {
     // 赋值模型
@@ -29,6 +27,7 @@ export class FormComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log('form: 初始化');
   }
 
   // 表单事件
@@ -47,11 +46,6 @@ export class FormComponent implements OnInit {
           case 'formBtn':
             this.loginFormBtn(data);
             break;
-          case 'run': 
-            if (data && data.name) {
-              this[data.name] && this[data.name](data.data);
-            }
-            break;
           default:
             break;
         }
@@ -63,11 +57,6 @@ export class FormComponent implements OnInit {
             break;
           case 'formBtn':
             this.registerFormBtn(data);
-            break;
-          case 'run': 
-            if (data && data.name) {
-              this[data.name] && this[data.name](data.data);
-            }
             break;
           default:
             break;

@@ -1,0 +1,38 @@
+html[data-theme='light'] {
+  // 主题颜色
+  --primaryColor: var(--blue);
+  --deepPrimaryColor: var(--deepBlue);
+  // 成功颜色
+  --successColor: var(--green);
+  // 警告颜色
+  --warningColor: var(--orange);
+  // 危险颜色
+  --dangerColor: var(--red);
+
+  // 链接颜色
+  --linkColor: var(--primaryColor);
+  --linkHoverColor: var(--red);
+  --linkVisitedColor: var(--purple);
+  
+  // 文字
+  --textColor: var(--deepGray);
+  --reverseTextColor: var(--white);
+
+  // 阴影
+  --shadowColor: var(--gray);
+  --lightShadowColor: var(--lightGray);
+  --moreLightShadowColor: var(--moreLightGray);
+  --primaryShadowColor: var(--deepPrimaryColor);
+
+  // 边框
+  --borderColor: var(--lightGray);
+
+  // 背景
+  --backgroundColor: var(--white);
+  --primaryBackgroundColor: var(--primaryColor);
+  --reverseBackgroundColor: var(--gray);
+  --lightBackgroundColor: var(--lightWhite);
+  --transparentBackgroundColor: var(--lessTransparentWhite);
+
+  --hoverColorCorrection: 25%;
+}

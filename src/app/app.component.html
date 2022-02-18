@@ -1,5 +1,12 @@
 <div id="app">
-  <router-outlet></router-outlet>
+  <router-outlet>
+    <div class="loadingCont" *ngIf="loading">
+      <div class="animation">
+        <div *ngFor="let item of [0, 1, 2, 3, 4]" class="dot"></div>
+      </div>
+      <p class="text">{{ loadingMsg }}</p>
+    </div>
+  </router-outlet>
   <!-- popup 出口 -->
   <router-outlet name="popup"></router-outlet>
 </div>

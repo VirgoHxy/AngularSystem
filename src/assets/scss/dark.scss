@@ -1,0 +1,48 @@
+@import '../../styles.scss';
+
+html[data-theme='dark'] {
+  --darkBlue: #292c31;
+
+  // 主题颜色
+  --primaryColor: var(--blue);
+  --deepPrimaryColor: var(--deepBlue);
+  // 成功颜色
+  --successColor: var(--green);
+  // 警告颜色
+  --warningColor: var(--orange);
+  // 危险颜色
+  --dangerColor: var(--red);
+
+  // 链接颜色
+  --linkColor: var(--primaryColor);
+  --linkHoverColor: var(--red);
+  --linkVisitedColor: var(--purple);
+  
+  // 文字
+  --textColor: var(--white);
+  --reverseTextColor: var(--deepGray);
+
+  // 阴影
+  --shadowColor: var(--deepGray);
+  --lightShadowColor: var(--gray);
+  --moreLightShadowColor: var(--lightGray);
+  --primaryShadowColor: var(--deepGray);
+
+  // 边框
+  --borderColor: var(--lightWhite);
+
+  // 背景
+  --backgroundColor: var(--moreDeepGray);
+  --primaryBackgroundColor: var(--darkBlue);
+  --reverseBackgroundColor: var(--lightWhite);
+  --lightBackgroundColor: var(--deepGray);
+  --transparentBackgroundColor: var(--lessTransparentBlack);
+
+  --hoverColorCorrection: 25%;
+
+  // 样式
+  button:disabled {
+    background-color: var(--deepGray);
+    color: var(--moreLightGray);
+  }
+}

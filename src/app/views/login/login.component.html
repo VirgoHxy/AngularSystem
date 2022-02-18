@@ -1,14 +1,14 @@
 <div id="login">
   <!-- 响应式表单 显示创建FormControl -->
-  <div [formGroup]="loginForm" (ngSubmit)="login()">
+  <div [formGroup]="loginForm" (ngSubmit)="login()" (keyup)="enterLogin($event)">
     <!-- 标题 -->
     <h2 class="title">
-      {{config.title}}
+      {{appConfig.title}}
     </h2>
     <!-- 项 -->
     <div class="formCont">
       <div class="formItem">
-        用户名<span class="red">*</span>:
+        用户名<span class="tip">*</span>:
         <input type="text" formControlName="account" appForbiddenAccount="test" required>
         <!-- 错误信息 -->
         <div *ngIf="account.invalid && (account.dirty || account.touched)" class="alert-danger">
@@ -21,7 +21,7 @@
         </div>
       </div>
       <div class="formItem">
-        密&nbsp;&nbsp;&nbsp;码<span class="red">*</span>:
+        密&nbsp;&nbsp;&nbsp;码<span class="tip">*</span>:
         <input type="password" formControlName="password" required>
         <!-- 错误信息 -->
         <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert-danger">
